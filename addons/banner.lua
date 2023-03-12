@@ -1,10 +1,11 @@
-get.genv().Key = "BLAST"
+getgenv().Key = "BANME"
 
-local key = _G.Key
-local check = "https://lepidote-vibration.000webhostapp.com/check.php?key=" .. key
+local key = getgenv().Key
+local check = "checkhere?key=" .. key
 if game:HttpGet(check) == "Whitelisted" then
-	printconsole("wl")
-end
+    if syn then
+        printconsole("WHITELISTED")
+    end
 else
-	game.Players.LocalPlayer:Kick("YOURE BLACKLISTED BY JOKA LMAO AND UR BANNED")
+    game.Players.LocalPlayer:Kick("YOU'RE ON THE BLACKLIST SECTION, DM joka#1337 TO APPEAL YOURSELF.")
 end
