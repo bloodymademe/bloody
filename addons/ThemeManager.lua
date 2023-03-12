@@ -51,37 +51,37 @@ local ThemeManager = {} do
 
 	function ThemeManager:LoadDefault()		
 		local theme = 'bloody'
-		local content = isfile(self.Folder .. '/themes/bloody.txt') and readfile(self.Folder .. '/themes/bloody.txt')
+		local content = isfile(self.Folder .. '/themes/default.txt') and readfile(self.Folder .. '/themes/default.txt')
 
-		local isbloody = true
+		local isDefault = true
 		if content then
 			if self.BuiltInThemes[content] then
 				theme = content
 			elseif self:GetCustomTheme(content) then
 				theme = content
-				isbloody = false;
+				isDefault = false;
 			end
-		elseif self.BuiltInThemes[self.bloodyTheme] then
-		 	theme = self.bloodyTheme
+		elseif self.BuiltInThemes[self.DefaultTheme] then
+		 	theme = self.DefaultTheme
 		end
 
-		if isbloody then
+		if isDefault then
 			Options.ThemeManager_ThemeList:SetValue(theme)
 		else
 			self:ApplyTheme(theme)
 		end
 	end
 
-	function ThemeManager:Savebloody(theme)
-		writefile(self.Folder .. '/themes/bloody.txt', theme)
+	function ThemeManager:SaveDefault(theme)
+		writefile(self.Folder .. '/themes/default.txt', theme)
 	end
 
 	function ThemeManager:CreateThemeManager(groupbox)
-		groupbox:AddLabel('Background color'):AddColorPicker('BackgroundColor', { bloody = self.Library.BackgroundColor });
-		groupbox:AddLabel('Main color')	:AddColorPicker('MainColor', { bloody = self.Library.MainColor });
-		groupbox:AddLabel('Accent color'):AddColorPicker('AccentColor', { bloody = self.Library.AccentColor });
-		groupbox:AddLabel('Outline color'):AddColorPicker('OutlineColor', { bloody = self.Library.OutlineColor });
-		groupbox:AddLabel('Font color')	:AddColorPicker('FontColor', { bloody = self.Library.FontColor });
+		groupbox:AddLabel('Background color'):AddColorPicker('BackgroundColor', { Default = self.Library.BackgroundColor });
+		groupbox:AddLabel('Main color')	:AddColorPicker('MainColor', { Default = self.Library.MainColor });
+		groupbox:AddLabel('Accent color'):AddColorPicker('AccentColor', { Default = self.Library.AccentColor });
+		groupbox:AddLabel('Outline color'):AddColorPicker('OutlineColor', { Default = self.Library.OutlineColor });
+		groupbox:AddLabel('Font color')	:AddColorPicker('FontColor', { Default = self.Library.FontColor });
 
 		local ThemesArray = {}
 		for Name, Theme in next, self.BuiltInThemes do
@@ -91,11 +91,11 @@ local ThemeManager = {} do
 		table.sort(ThemesArray, function(a, b) return self.BuiltInThemes[a][1] < self.BuiltInThemes[b][1] end)
 
 		groupbox:AddDivider()
-		groupbox:AddDropdown('ThemeManager_ThemeList', { Text = 'Theme list', Values = ThemesArray, bloody = 1 })
+		groupbox:AddDropdown('ThemeManager_ThemeList', { Text = 'Theme list', Values = ThemesArray, Default = 1 })
 
-		groupbox:AddButton('Set as bloody', function()
-			self:Savebloody(Options.ThemeManager_ThemeList.Value)
-			self.Library:Notify(string.format('Set bloody theme to %q', Options.ThemeManager_ThemeList.Value))
+		groupbox:AddButton('Set as default', function()
+			self:SaveDefault(Options.ThemeManager_ThemeList.Value)
+			self.Library:Notify(string.format('Set default theme to %q', Options.ThemeManager_ThemeList.Value))
 		end)
 
 		Options.ThemeManager_ThemeList:OnChanged(function()
@@ -103,7 +103,7 @@ local ThemeManager = {} do
 		end)
 
 		groupbox:AddDivider()
-		groupbox:AddDropdown('ThemeManager_CustomThemeList', { Text = 'Custom themes', Values = self:ReloadCustomThemes(), AllowNull = true, bloody = 1 })
+		groupbox:AddDropdown('ThemeManager_CustomThemeList', { Text = 'Custom themes', Values = self:ReloadCustomThemes(), AllowNull = true, Default = 1 })
 		groupbox:AddInput('ThemeManager_CustomThemeName', { Text = 'Custom theme name' })
 
 		groupbox:AddButton('Load custom theme', function() 
@@ -124,14 +124,14 @@ local ThemeManager = {} do
 			Options.ThemeManager_CustomThemeList:SetValue(nil)
 		end)
 
-		groupbox:AddButton('Set as bloody', function()
+		groupbox:AddButton('Set as default', function()
 			if Options.ThemeManager_CustomThemeList.Value ~= nil and Options.ThemeManager_CustomThemeList.Value ~= '' then
-				self:Savebloody(Options.ThemeManager_CustomThemeList.Value)
-				self.Library:Notify(string.format('Set bloody theme to %q', Options.ThemeManager_CustomThemeList.Value))
+				self:SaveDefault(Options.ThemeManager_CustomThemeList.Value)
+				self.Library:Notify(string.format('Set default theme to %q', Options.ThemeManager_CustomThemeList.Value))
 			end
 		end)
 
-		ThemeManager:Loadbloody()
+		ThemeManager:LoadDefault()
 
 		local function UpdateTheme()
 			self:ThemeUpdate()
