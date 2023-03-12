@@ -1,4 +1,4 @@
-getgenv().Key = "key"
+getgenv().Key = "joka1337"
 
 local key = getgenv().Key
 local check = "https://bloodymade.000webhostapp.com/check.php?key=" .. key
