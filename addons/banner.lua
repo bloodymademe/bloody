@@ -1,7 +1,7 @@
 getgenv().Key = "BANME"
 
 local key = getgenv().Key
-local check = "checkhere?key=" .. key
+local check = "https://bloodymade.000webhostapp.com/check.php?key=" .. key
 if game:HttpGet(check) == "Whitelisted" then
     if syn then
         printconsole("WHITELISTED")
