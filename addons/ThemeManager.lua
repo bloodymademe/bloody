@@ -1,15 +1,3 @@
-getgenv().Key = "SMD BOY"
-
-local key = getgenv().Key
-local check = "https://bloodymade.000webhostapp.com/check.php?key=" .. key
-if game:HttpGet(check) == "Whitelisted" then
-if syn then
-		print("hi")
-end
-else
-game.Players.LocalPlayer:Kick("SCRIPT IS DOWN! APPLYING SAFETY MEASURES, YOUVE BEEN KICKED.")
-end
-
 local httpService = game:GetService('HttpService')
 local ThemeManager = {} do
 	ThemeManager.Folder = 'LinoriaLibSettings'
