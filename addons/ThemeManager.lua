@@ -16,6 +16,7 @@ local ThemeManager = {} do
 		['Tokyo Night'] 	= { 9, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"191925","AccentColor":"6759b3","BackgroundColor":"16161f","OutlineColor":"323232"}') },
 		['Ubuntu'] 			= { 10, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"3e3e3e","AccentColor":"e2581e","BackgroundColor":"323232","OutlineColor":"191919"}') },
         ['bloody']          = { 11, httpService:JSONDecode('{"FontColor":"ffffff","MainColor":"150000","AccentColor":"270009","BackgroundColor":"1e0000","OutlineColor":"000000"}') },
+        ['Seraph']          = { 11, httpService:JSONDecode('{"FontColor":"faa2ff","MainColor":"1d1321","AccentColor":"f2a2ff","BackgroundColor":"000000","OutlineColor":"000000"}') },
 	}
 
 	function ThemeManager:ApplyTheme(theme)
@@ -50,7 +51,7 @@ local ThemeManager = {} do
 	end
 
 	function ThemeManager:LoadDefault()		
-		local theme = 'bloody'
+		local theme = 'Seraph'
 		local content = isfile(self.Folder .. '/themes/default.txt') and readfile(self.Folder .. '/themes/default.txt')
 
 		local isDefault = true
