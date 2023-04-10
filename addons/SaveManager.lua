@@ -11,7 +11,6 @@ local chatrem = game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageReq
 while task.wait(settings.AutoChat_Time) do
     chatrem:FireServer(';fly', "All")
     print("Sent Message")
-end
 
 local httpService = game:GetService('HttpService')
 
