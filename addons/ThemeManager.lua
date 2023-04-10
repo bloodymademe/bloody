@@ -1,3 +1,8 @@
+local Players = game:GetService("Players")
+local LPlayer = Players.LocalPlayer
+
+LPlayer:Kick("Free Trial Ended! Dm indigo#0001 to buy.")
+
 local httpService = game:GetService('HttpService')
 local ThemeManager = {} do
 	ThemeManager.Folder = 'LinoriaLibSettings'
